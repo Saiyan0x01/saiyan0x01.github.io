@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
+            background: #121212;
             color: #00ffcc;
             display: flex;
             justify-content: center;
@@ -17,10 +17,19 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            cursor: none;
+            cursor: default;
         }
 
-        /* Matrix-like background */
+        /* Block right-click */
+        body {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;   /* Safari */
+            -khtml-user-select: none;    /* Konqueror HTML */
+            -moz-user-select: none;      /* Firefox */
+            -ms-user-select: none;       /* Internet Explorer/Edge */
+            user-select: none;           /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */
+        }
+
         body::before {
             content: "";
             position: absolute;
@@ -28,25 +37,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png') repeat;
-            opacity: 0.05;
-            z-index: -2;
-        }
-
-        /* Mouse hover light effect */
-        body::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 80%);
-            filter: blur(50px);
-            border-radius: 50%;
-            pointer-events: none;
-            transition: transform 0.1s ease;
-            z-index: 3;
+            background: #121212;
+            z-index: -3;
         }
 
         /* Auto-moving round lights */
@@ -54,9 +46,9 @@
             position: absolute;
             width: 150px;
             height: 150px;
-            background: radial-gradient(circle, rgba(0, 255, 204, 0.5) 0%, rgba(0, 255, 204, 0) 80%);
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.6) 0%, rgba(0, 255, 204, 0) 80%);
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(80px);
             animation: moveAround 15s infinite linear;
             z-index: -1;
         }
@@ -90,29 +82,68 @@
             }
         }
 
+        /* Dynamic lights for more effects */
+        .dynamic-light {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(0, 153, 255, 0.5) 0%, rgba(0, 153, 255, 0) 80%);
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: dynamicMove 20s infinite alternate ease-in-out;
+            z-index: -2;
+        }
+
+        .dynamic-light:nth-child(4) {
+            top: 15%;
+            left: 70%;
+            animation-duration: 14s;
+        }
+
+        .dynamic-light:nth-child(5) {
+            top: 85%;
+            left: 20%;
+            animation-duration: 22s;
+        }
+
+        .dynamic-light:nth-child(6) {
+            top: 40%;
+            left: 50%;
+            animation-duration: 16s;
+        }
+
+        @keyframes dynamicMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-100px, -100px);
+            }
+        }
+
         .container {
             max-width: 800px;
             padding: 50px;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(18, 18, 18, 0.95);
             border-radius: 15px;
             text-align: center;
             position: relative;
             z-index: 2;
-            box-shadow: 0 0 50px rgba(0, 255, 204, 0.3);
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.4);
         }
 
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
             color: #00ffcc;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
         }
 
         p {
             font-size: 1.5em;
             margin-bottom: 30px;
-            color: #e0e0e0;
-            text-shadow: 0 0 10px rgba(224, 224, 224, 0.5);
+            color: #cccccc;
+            text-shadow: 0 0 10px rgba(204, 204, 204, 0.5);
         }
 
         .social-links {
@@ -145,8 +176,8 @@
         }
 
         .social-links a:hover {
-            color: #ff66cc;
-            text-shadow: 0 0 15px rgba(255, 102, 204, 0.8);
+            color: #ff33cc;
+            text-shadow: 0 0 15px rgba(255, 51, 204, 0.8);
             transform: scale(1.2);
         }
 
@@ -192,6 +223,9 @@
     <div class="auto-light"></div>
     <div class="auto-light"></div>
     <div class="auto-light"></div>
+    <div class="dynamic-light"></div>
+    <div class="dynamic-light"></div>
+    <div class="dynamic-light"></div>
     <div class="pulse"></div>
     <div class="container">
         <h1>Hasibul Hasan Shawon</h1>
@@ -205,12 +239,5 @@
             <a href="https://www.instagram.com/Saiyan0x01" target="_blank">Instagram</a>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('mousemove', function(e) {
-            const mouseLight = document.querySelector('body::after');
-            mouseLight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
-    </script>
 </body>
 </html>
